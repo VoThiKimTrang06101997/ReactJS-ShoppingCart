@@ -151,7 +151,12 @@ export default class ShoppingCart extends Component {
             prodDetail,   // ES6 Object Literal
         });
     };
+    
     render() {
+        const {carList} = this.state;
+        let tongSoLuong = carList.reduce((tsl, spGH, index) => {
+            return tsl += spGH.soLuong;
+        }, 0)
         return (
             <section className="container">
                 <h3 className="title text-center">Bài tập giỏ hàng</h3>
@@ -160,7 +165,7 @@ export default class ShoppingCart extends Component {
                         className="btn btn-danger "
                         data-toggle="modal"
                         data-target="#modelId">
-                        Giỏ hàng (0)
+                        Giỏ hàng ({tongSoLuong})
                     </button>
                 </div>
                 <ProductList handleChangeProdDetail={this.handleChangeProdDetail} 
