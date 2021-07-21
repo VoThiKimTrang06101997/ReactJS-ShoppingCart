@@ -17,8 +17,8 @@ export default class ModalCart extends Component {
             {cart.soLuong}
             <button onClick={()=>this.props.handleTangGiamSoLuong(cart.maSP, true)}>+</button>
           </td>
-          <td>{cart.giaBan}</td>
-          <td>{cart.soLuong * cart.giaBan}</td>
+          <td>{cart.giaBan.toLocaleString()}</td>
+          <td>{(cart.soLuong * cart.giaBan).toLocaleString()}</td>
           <td>
             <button className="btn btn-danger" 
             onClick={() => this.props.handleDeleteCart(cart.maSP)}
@@ -69,6 +69,18 @@ export default class ModalCart extends Component {
                     </tr>
                   </thead>
                   <tbody>{this.renderCartList()}</tbody>
+                  <tfoot>
+                    <tr>
+                      <td colSpan="5"></td>
+                      <td>Tổng Tiền</td>
+                      <td>
+                        {this.props.carList.reduce((tongTien, cart, index) =>{
+                          return tongTien += cart.soLuong * cart.giaBan
+                        },0).toLocaleString()
+                        }
+                      </td>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
               <div className="modal-footer">
